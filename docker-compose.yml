@@ -1,8 +1,8 @@
-version: '2.1'
+version: '3'
 services:
   mysql:
     image: mysql:5.7
-    container_name: jira_db
+    container_name: bg-db
     environment:
       - TZ=Asia/Shanghai
       - MYSQL_LOG_CONSOLE=true
@@ -14,37 +14,28 @@ services:
     volumes:
       - ./mysql/data:/var/lib/mysql
     ports: 
-      - 3306:3306
+      - 13306:3306
     networks: 
       vpn:
         ipv4_address: 172.168.88.2
-    # healthcheck:
-    #     test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
-    #     timeout: 5s
-    #     retries: 10
     restart: always
 
 
   jira:
-    container_name: jira_srv
+    container_name: bg-jira
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Jira.Dockerfile
     environment:
       - TZ=Asia/Shanghai
-#      - JVM_MINIMUM_MEMORY=1g
-#      - JVM_MAXIMUM_MEMORY=12g
-#      - JVM_CODE_CACHE_ARGS='-XX:InitialCodeCacheSize=1g -XX:ReservedCodeCacheSize=8g'
     volumes:
       - ./jira/conf/server.xml:/opt/atlassian/jira/conf/server.xml
       - ./jira/atlassian:/var/atlassian/jira
     ports:
-      - "8080:8080"
+      - "18080:8080"
     networks: 
       vpn:
         ipv4_address: 172.168.88.3
-    depends_on:
-      - mysql
     restart: always
 
 
