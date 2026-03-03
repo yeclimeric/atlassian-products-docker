@@ -8,8 +8,8 @@ LABEL description="atlassian jira 破解版"
 
 # 注入破解包
 COPY ./utils/crack/atlassian-agent.jar /opt/crack/atlassian-agent.jar
-COPY ./utils/crack/atlassian-universal-plugin-manager-plugin-2.22.4.jar /opt/atlassian/jira/atlassian-jira/WEB-INF/atlassian-bundled-plugins/atlassian-universal-plugin-manager-plugin-2.22.4.jar
-COPY ./utils/crack/atlassian-extras-3.2.jar /opt/atlassian/jira/atlassian-jira/WEB-INF/lib/atlassian-extras-3.2.jar
+#COPY ./utils/crack/atlassian-universal-plugin-manager-plugin-2.22.4.jar /opt/atlassian/jira/atlassian-jira/WEB-INF/atlassian-bundled-plugins/atlassian-universal-plugin-manager-plugin-2.22.4.jar
+#COPY ./utils/crack/atlassian-extras-3.2.jar /opt/atlassian/jira/atlassian-jira/WEB-INF/lib/atlassian-extras-3.2.jar
 
 
 # 设置JAVA_OPTS

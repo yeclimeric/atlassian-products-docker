@@ -14,7 +14,6 @@ services:
       - TZ=Asia/Shanghai
     volumes:
       - ./jira/conf/server.xml:/opt/atlassian/jira/conf/server.xml
-      - ./jira/atlassian:/var/atlassian/jira
     ports:
       - "18080:8080"
     networks:
