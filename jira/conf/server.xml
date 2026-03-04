@@ -63,7 +63,12 @@
                    redirectPort="8443"
                    acceptCount="100"
                    disableUploadTimeout="true"
-                   bindOnInit="false"/>
+                   bindOnInit="false"
+                   
+                   scheme="https"
+                   secure="true"
+                   proxyPort="443"
+                   />
 
         <!--
         ====================================================================================
