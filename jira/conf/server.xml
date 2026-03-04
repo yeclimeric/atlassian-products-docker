@@ -77,8 +77,8 @@
 
             * Uncomment the Connector below
             * Execute:
-                %JAVA_HOME%\bin\keytool -genkey -alias tomcat -keyalg RSA (Windows) 
-                $JAVA_HOME/bin/keytool -genkey -alias tomcat -keyalg RSA (Unix) 
+                %JAVA_HOME%\bin\keytool -genkey -alias tomcat -keyalg RSA (Windows)
+                $JAVA_HOME/bin/keytool -genkey -alias tomcat -keyalg RSA (Unix)
                 with a password value of "changeit" for both the certificate and the keystore itself.
             * If you are on JDK1.3 or earlier, download and install JSSE 1.0.2 or later, and put the JAR files into "$JAVA_HOME/jre/lib/ext"
             * Restart and visit https://localhost:8443/

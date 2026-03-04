@@ -1,21 +1,28 @@
 version: '3'
 
+# args:
+#   - JIRA_VERSION=${JIRA_VERSION:-8.19.0}  # 无值时用8.19.0
+
 networks:
     1panel-network:
         external: true
 
 services:
   jira:
+    image: yeclimeric/jira:${JIRA_VERSION:-latest}
     container_name: jira
     build:
       context: .
       dockerfile: Jira.Dockerfile
+      args:
+        - JIRA_VERSION=${JIRA_VERSION}
     environment:
       - TZ=Asia/Shanghai
     volumes:
       - ./jira/conf/server.xml:/opt/atlassian/jira/conf/server.xml
+      - ${JIRA_DATA_DIR}:/var/atlassian/application-data/jira
     ports:
-      - "18080:8080"
+      - "8080:8080"
     networks:
       - 1panel-network
     restart: always
