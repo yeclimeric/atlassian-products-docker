@@ -16,7 +16,12 @@ COPY ./utils/crack/atlassian-agent.jar /opt/crack/atlassian-agent.jar
 # 注入 mysql 驱动包
 COPY ./mysql/driver/mysql-connector-java-8.0.25.jar /opt/atlassian/jira/atlassian-jira/WEB-INF/lib/mysql-connector-java-8.0.25.jar
 
+COPY ./jira/lib/log4j-api-2.17.1.jar /opt/atlassian/jira/atlassian-jira/WEB-INF/lib/log4j-api-2.17.1.jar
+COPY ./jira/lib/log4j-core-2.17.1.jar /opt/atlassian/jira/atlassian-jira/WEB-INF/lib/log4j-core-2.17.1.jar
+
+
 # 设置JAVA_OPTS
 ENV JAVA_OPTS="-javaagent:/opt/crack/atlassian-agent.jar"
+ENV JVM_SUPPORT_RECOMMENDED_ARGS="-Dcom.atlassian.xstream.config.file=atlassian-xstream.xml -Dxstream.security.manager=allow"
 
 CMD ["/opt/atlassian/jira/bin/catalina.sh", "run"]
