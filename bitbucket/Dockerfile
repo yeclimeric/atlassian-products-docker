@@ -12,4 +12,5 @@ LABEL description="atlassian bitbucket 破解版"
 
 COPY utils/crack/atlassian-agent.jar /opt/crack/atlassian-agent.jar
 
-ENV JAVA_OPTS="-javaagent:/opt/crack/atlassian-agent.jar"
+COPY bitbucket/bin/_start-webapp.sh /opt/atlassian/bitbucket/bin/_start-webapp.sh
+RUN chmod +x /opt/atlassian/bitbucket/bin/_start-webapp.sh
