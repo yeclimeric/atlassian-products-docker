@@ -10,6 +10,6 @@ LABEL maintainer="不就订个外卖么<yeclimeric@gmail.com>"
 LABEL version="${BITBUCKET_VERSION}"
 LABEL description="atlassian bitbucket 破解版"
 
-COPY ../utils/crack/atlassian-agent.jar /opt/crack/atlassian-agent.jar
+COPY utils/crack/atlassian-agent.jar /opt/crack/atlassian-agent.jar
 
 ENV JVM_SUPPORT_RECOMMENDED_ARGS="-javaagent:/opt/crack/atlassian-agent.jar"

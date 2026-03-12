@@ -30,7 +30,7 @@ services:
     container_name: jira
     build:
       context: .
-      dockerfile: Jira.Dockerfile
+      dockerfile: jira/Dockerfile
       args:
         - JIRA_VERSION=${JIRA_VERSION}
     environment:
@@ -40,6 +40,26 @@ services:
       - ${JIRA_DATA_DIR}:/var/atlassian/application-data/jira
     ports:
       - "8080:8080"
+    depends_on:
+      - mysql
+    networks:
+      - bridge
+    restart: always
+  bitbucket:
+    image: yeclimeric/bitbucket:${BITBUCKET_VERSION:-latest}
+    container_name: bitbucket
+    build:
+      context: .
+      dockerfile: bitbucket/Dockerfile
+      args:
+        - BITBUCKET_VERSION=${BITBUCKET_VERSION}
+    environment:
+      - TZ=Asia/Shanghai
+    volumes:
+      - ${BITBUCKET_DATA_DIR}:/var/atlassian/application-data/bitbucket
+    ports:
+      - "7990:7990"
+      - "7999:7999"
     depends_on:
       - mysql
     networks:
