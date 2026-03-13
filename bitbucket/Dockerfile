@@ -1,6 +1,10 @@
-ARG BITBUCKET_VERSION=9.4.18
+ARG BITBUCKET_VERSION=8.6
 
 FROM atlassian/bitbucket:${BITBUCKET_VERSION}
+
+LABEL maintainer="不就订个外卖么<yeclimeric@gmail.com>"
+LABEL version="${BITBUCKET_VERSION}"
+LABEL description="atlassian bitbucket 破解版"
 
 ARG BITBUCKET_VERSION
 
@@ -9,12 +13,10 @@ ENV TZ=Asia/Shanghai
 ENV START_SCRIPT=${BITBUCKET_INSTALL_DIR}/bin/start-bitbucket.sh
 ENV WEBAPP_SCRIPT=${BITBUCKET_INSTALL_DIR}/bin/_start-webapp.sh
 
-LABEL maintainer="不就订个外卖么<yeclimeric@gmail.com>"
-LABEL version="${BITBUCKET_VERSION}"
-LABEL description="atlassian bitbucket 破解版"
 
-COPY mysql/driver/mysql-connector-java-8.0.25.jar /opt/atlassian/bitbucket/WEB-INF/lib/mysql-connector-java-8.0.25.jar
+COPY mysql/driver/mysql-connector-java-8.0.25.jar ${BITBUCKET_INSTALL_DIR}/app/WEB-INF/lib/mysql-connector-java-8.0.25.jar
 
+# ==================== 处理破解相关问题 ====================
 COPY utils/crack/atlassian-agent.jar /opt/crack/atlassian-agent.jar
 
 RUN sed -i '2i export ATLASSIAN_DIR="/opt/atlassian/bitbucket/app/WEB-INF/lib"' ${START_SCRIPT}

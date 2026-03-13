@@ -2,13 +2,11 @@
 
 > docker 一键部署 JIRA 破解版
 
-------
-
+---
 
 ## 环境要求
 
 ![](https://img.shields.io/badge/Platform-Linux%20amd64-brightgreen.svg) ![](https://img.shields.io/badge/Platform-Windows%20x64-brightgreen.svg)
-
 
 ## 目录结构说明
 
@@ -74,7 +72,6 @@ lht2tUwCQi3GkE=X02mi
 - 点击 `Next`，然后在 Configure Email Notifications 选择 `later`（因为邮箱是假的），点击 `Finish`
 - 最后配置语言、头像等，则完成 JIRA 初始化
 
-
 ## 可选：数据迁移
 
 docker 创建的 JIRA 完全是空的，如果你在其他地方有部署 JIRA，可以把数据迁移到这个项目。
@@ -89,6 +86,19 @@ docker 创建的 JIRA 完全是空的，如果你在其他地方有部署 JIRA�
 > 注：数据迁移是全库迁移，所以用户数据、License 数据等都会被覆盖，故前面创建的管理员账号在迁移后已经不存在了。
 
 
+
+# 各产品支持情况
+
+## Jira Software
+
+## Bitbucket
+
+最后支持Server的版本是8.14，但是8.14内置的universal-plugin-manager插件版本无法在线查找app，并且不能安装插件包，替换upm包也不好使，所以降级至8.6
+
+>  依据：[Atlassian Universal Plugin Manager版本说明](https://marketplace.atlassian.com/apps/23915/atlassian-universal-plugin-manager/version-history?versionHistoryHosting=server)
+
+## Confluence
+
 ## 附一：破解原理
 
 破解步骤可参考 [https://github.com/ealebed/jira](https://github.com/ealebed/jira) 。
@@ -100,7 +110,6 @@ docker 创建的 JIRA 完全是空的，如果你在其他地方有部署 JIRA�
 但是因为 JIRA 前端会对 License 格式做校验，因此前面在初始化时还是形式上填了一个试用版 License 。
 
 > 当前硬编码的 License 过期时间为 2030 年
-
 
 ## 附二：90 天试用 License 申请方式
 
