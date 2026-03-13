@@ -37,7 +37,6 @@ services:
       - TZ=Asia/Shanghai
     volumes:
       - ./jira/conf/server.xml:/opt/atlassian/jira/conf/server.xml
-      - ${JIRA_DATA_DIR}:/var/atlassian/application-data/jira
     ports:
       - "8080:8080"
     depends_on:
@@ -55,8 +54,6 @@ services:
         - BITBUCKET_VERSION=${BITBUCKET_VERSION}
     environment:
       - TZ=Asia/Shanghai
-    volumes:
-      - ${BITBUCKET_DATA_DIR}:/var/atlassian/application-data/bitbucket
     ports:
       - "7990:7990"
       - "7999:7999"
