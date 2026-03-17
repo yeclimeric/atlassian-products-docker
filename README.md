@@ -85,8 +85,6 @@ docker 创建的 JIRA 完全是空的，如果你在其他地方有部署 JIRA�
 
 > 注：数据迁移是全库迁移，所以用户数据、License 数据等都会被覆盖，故前面创建的管理员账号在迁移后已经不存在了。
 
-
-
 # 各产品支持情况
 
 ## Jira Software
@@ -95,7 +93,7 @@ docker 创建的 JIRA 完全是空的，如果你在其他地方有部署 JIRA�
 
 最后支持Server的版本是8.14，但是8.14内置的universal-plugin-manager插件版本无法在线查找app，并且不能安装插件包，替换upm包也不好使，所以降级至8.6
 
->  依据：[Atlassian Universal Plugin Manager版本说明](https://marketplace.atlassian.com/apps/23915/atlassian-universal-plugin-manager/version-history?versionHistoryHosting=server)
+> 依据：[Atlassian Universal Plugin Manager版本说明](https://marketplace.atlassian.com/apps/23915/atlassian-universal-plugin-manager/version-history?versionHistoryHosting=server)
 
 ## Confluence
 
@@ -121,3 +119,10 @@ docker 创建的 JIRA 完全是空的，如果你在其他地方有部署 JIRA�
   - Your instance is:  up and running
   - Server ID:         [在初始化 JIRA 时填写 License 的步骤会得到]
 - 点击 `Generate License` 后，可得到 90 天试用的 License Key
+
+# 附三：各产品历史版本
+
+[Jira历史版本](https://www.atlassian.com/software/jira/download-archives)
+
+
+[应用管理器插件](https://marketplace.atlassian.com/apps/23915/atlassian-universal-plugin-manager/version-history?versionHistoryHosting=server)
