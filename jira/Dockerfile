@@ -13,17 +13,25 @@ LABEL description="atlassian jira 破解版"
 
 ENV START_SCRIPT=${JIRA_INSTALL_DIR}/bin/start-jira.sh
 ENV PLUGIN_DIR=${JIRA_INSTALL_DIR}/atlassian-jira/WEB-INF/atlassian-bundled-plugins
+ENV LIB_DIR=${JIRA_INSTALL_DIR}/atlassian-jira/WEB-INF/lib
 
 # 注入破解包
 COPY utils/crack/atlassian-agent.jar /opt/crack/atlassian-agent.jar
 # 注入可联网的应用市场插件包
-COPY utils/lib/atlassian-universal-plugin-manager-plugin-6.0.8.jar ${PLUGIN_DIR}/
+# COPY utils/lib/atlassian-universal-plugin-manager-plugin-6.0.8.jar ${PLUGIN_DIR}/
 # 删除默认插件包
-RUN rm -f ${PLUGIN_DIR}/atlassian-universal-plugin-manager-plugin-6.3.10.jar
+# RUN rm -f ${PLUGIN_DIR}/atlassian-universal-plugin-manager-plugin-6.3.10.jar
 
 # 验证拷贝成功，删除成功
-RUN echo "=== 验证插件目录,看到atlassian-universal-plugin-manager-plugin-6.0.8.jar插件包表示成功 ===" \
-    && ls -l ${PLUGIN_DIR} | grep "universal-plugin-manager"
+# RUN echo "=== 验证插件目录,看到atlassian-universal-plugin-manager-plugin-6.0.8.jar插件包表示成功 ===" \
+#     && ls -l ${PLUGIN_DIR} | grep "universal-plugin-manager"
+
+# 删除默认插件包
+# RUN rm -f ${LIB_DIR}/commons-codec-*.jar
+# COPY jira/crack/commons-codec-1.9.jar ${LIB_DIR}
+# 验证拷贝成功，删除成功
+# RUN echo "=== 验证lib目录,看到common-codec-1.9.jar插件包表示成功 ===" \
+#     && ls -l ${LIB_DIR} | grep "commons-codec"
 
 RUN sed -i '2i export ATLASSIAN_DIR="${JIRA_INSTALL_DIR}/atlassian-jira/WEB-INF/lib"' ${START_SCRIPT}
 
