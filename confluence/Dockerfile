@@ -2,10 +2,9 @@ ARG CONFLUENCE_VERSION=8.5
 
 FROM atlassian/confluence:${CONFLUENCE_VERSION}
 
-ARG MAINTAINER
 ARG CONFLUENCE_VERSION
 
-LABEL maintainer="${MAINTAINER}"
+LABEL maintainer="不就订个外卖么<yeclimeric@gmail.com>"
 LABEL version="${CONFLUENCE_VERSION}"
 LABEL description="atlassian confluence 破解版"
 
