@@ -11,6 +11,7 @@ LABEL maintainer="不就订个外卖么<yeclimeric@gmail.com>"
 LABEL version="${JIRA_VERSION}"
 LABEL description="atlassian jira 破解版"
 
+ENV START_SCRIPT=${JIRA_INSTALL_DIR}/bin/start-jira.sh
 ENV PLUGIN_DIR=${JIRA_INSTALL_DIR}/atlassian-jira/WEB-INF/atlassian-bundled-plugins
 
 # 注入破解包
@@ -23,6 +24,12 @@ RUN rm -f ${PLUGIN_DIR}/atlassian-universal-plugin-manager-plugin-6.3.10.jar
 # 验证拷贝成功，删除成功
 RUN echo "=== 验证插件目录,看到atlassian-universal-plugin-manager-plugin-6.0.8.jar插件包表示成功 ===" \
     && ls -l ${PLUGIN_DIR} | grep "universal-plugin-manager"
+
+RUN sed -i '2i export ATLASSIAN_DIR="${JIRA_INSTALL_DIR}/atlassian-jira/WEB-INF/lib"' ${START_SCRIPT}
+
+# 验证写入结果（必加，确认是否成功）
+RUN echo "=== 验证Start Script脚本第2行,看到ATLASSIAN_DIR变量定义表示成功 ===" \
+    && head -3 ${START_SCRIPT}
 
 # 注入 mysql 驱动包
 COPY mysql/driver/mysql-connector-java-8.0.25.jar /opt/atlassian/jira/atlassian-jira/WEB-INF/lib/mysql-connector-java-8.0.25.jar
