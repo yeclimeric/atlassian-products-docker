@@ -74,7 +74,7 @@ services:
       args:
         - CONFLUENCE_VERSION=${CONFLUENCE_VERSION}
         - LABEL_MAINTAINER=${LABEL_MAINTAINER}
-        - LABEL_DESCRIPTION=${LABEL_DESCRIPTION}
+        - LABEL_DESCRIPTION=${LABEL_DESCRIPTION_CONFLUENCE}
     environment:
       - TZ=Asia/Shanghai
     volumes:
@@ -82,6 +82,28 @@ services:
     ports:
       - "8090:8090"
       - "8091:8091"
+    depends_on:
+      - mysql
+    networks:
+      - bridge
+    restart: always
+  bamboo:
+    image: yeclimeric/bamboo:${BAMBOO_VERSION:-latest}
+    container_name: bamboo
+    build:
+      context: .
+      dockerfile: bamboo/Dockerfile
+      args:
+        - BAMBOO_VERSION=${BAMBOO_VERSION}
+        - LABEL_MAINTAINER=${LABEL_MAINTAINER}
+        - LABEL_DESCRIPTION=${LABEL_DESCRIPTION_BAMBOO}
+    environment:
+      - TZ=Asia/Shanghai
+    volumes:
+      - ${BAMBOO_DATA_DIR}:/var/atlassian/application-data/bamboo
+    ports:
+      - "8085:8085"
+      - "54663:54663"
     depends_on:
       - mysql
     networks:
