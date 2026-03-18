@@ -30,10 +30,6 @@ COPY mysql/driver/mysql-connector-java-8.0.25.jar /opt/atlassian/jira/atlassian-
 # 设置JAVA_OPTS
 ENV JAVA_OPTS="-javaagent:/opt/crack/atlassian-agent.jar"
 
-# ENV JVM_SUPPORT_RECOMMENDED_ARGS="-Dcom.atlassian.xstream.config.file=atlassian-xstream.xml -Dxstream.security.manager=allow"
-
-# # 禁用 UPM 自动更新的核心环境变量
-# ENV ATL_JVM_SUPPORT_RECOMMENDED_ARGS="-Datlassian.plugins.enable.auto.update=false \
-#     -Dupm.marketplace.connect=false \
-#     -Dupm.auto.update.check=false \
-#     -Dupm.plugin.upload.enabled=true"
+ENV CATALINA_OPTS="-Dscheme=https \
+    -Dsecure=true \
+    -DproxyPort=443"
