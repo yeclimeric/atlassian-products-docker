@@ -109,3 +109,24 @@ services:
     networks:
       - bridge
     restart: always
+  crowd:
+    image: yeclimeric/crowd:${CROWD_VERSION:-latest}
+    container_name: crowd
+    build:
+      context: .
+      dockerfile: crowd/Dockerfile
+      args:
+        - CROWD_VERSION=${CROWD_VERSION}
+        - LABEL_MAINTAINER=${LABEL_MAINTAINER}
+        - LABEL_DESCRIPTION=${LABEL_DESCRIPTION_CROWD}
+    environment:
+      - TZ=Asia/Shanghai
+    volumes:
+      - ${CROWD_DATA_DIR}:/var/atlassian/application-data/crowd
+    ports:
+      - "8095:8095"
+    depends_on:
+      - mysql
+    networks:
+      - bridge
+    restart: always
