@@ -4,11 +4,10 @@ FROM atlassian/crowd:${CROWD_VERSION}
 
 ARG CROWD_VERSION
 ARG LABEL_MAINTAINER
-ARG LABEL_DESCRIPTION
 
 LABEL maintainer="${LABEL_MAINTAINER}"
 LABEL version="${CROWD_VERSION}"
-LABEL description="${LABEL_DESCRIPTION}"
+LABEL description="atlassian crowd 友谊版，仅供学习使用，不可用于商业用途"
 
 ENV TZ=Asia/Shanghai
 

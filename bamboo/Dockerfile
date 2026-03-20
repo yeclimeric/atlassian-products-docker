@@ -2,13 +2,11 @@ ARG BAMBOO_VERSION=9.4
 
 FROM atlassian/bamboo:${BAMBOO_VERSION}
 
-ARG BAMBOO_VERSION
 ARG LABEL_MAINTAINER
-ARG LABEL_DESCRIPTION
 
 LABEL maintainer="${LABEL_MAINTAINER}"
 LABEL version="${BAMBOO_VERSION}"
-LABEL description="${LABEL_DESCRIPTION}"
+LABEL description="atlassian bamboo 友谊版，仅供学习使用，不可用于商业用途"
 
 ENV TZ=Asia/Shanghai
 ENV PLUGIN_DIR=${BAMBOO_INSTALL_DIR}/atlassian-bamboo/WEB-INF/atlassian-bundled-plugins/

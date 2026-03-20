@@ -2,9 +2,11 @@ ARG BITBUCKET_VERSION=8.6
 
 FROM atlassian/bitbucket:${BITBUCKET_VERSION}
 
-LABEL maintainer="不就订个外卖么<yeclimeric@gmail.com>"
+ARG LABEL_MAINTAINER
+
+LABEL maintainer="${LABEL_MAINTAINER}"
 LABEL version="${BITBUCKET_VERSION}"
-LABEL description="atlassian bitbucket 破解版"
+LABEL description="atlassian bitbucket 友谊版，仅供学习使用，不可用于商业用途"
 
 ARG BITBUCKET_VERSION
 

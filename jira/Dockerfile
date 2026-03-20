@@ -1,15 +1,13 @@
 ARG JIRA_VERSION
+ARG LABEL_MAINTAINER
 
 FROM atlassian/jira-software:${JIRA_VERSION}
 
 ENV TZ=Asia/Shanghai
-ENV LANG=zh_CN.UTF-8
-ENV LANGUAGE=zh_CN:zh
-ENV LC_ALL=zh_CN.UTF-8
 
-LABEL maintainer="不就订个外卖么<yeclimeric@gmail.com>"
+LABEL maintainer="${LABEL_MAINTAINER}"
 LABEL version="${JIRA_VERSION}"
-LABEL description="atlassian jira 破解版"
+LABEL description="atlassian jira 友谊版，仅供学习使用，不可用于商业用途"
 
 ENV START_SCRIPT=${JIRA_INSTALL_DIR}/bin/start-jira.sh
 ENV PLUGIN_DIR=${JIRA_INSTALL_DIR}/atlassian-jira/WEB-INF/atlassian-bundled-plugins

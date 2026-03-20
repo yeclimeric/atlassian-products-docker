@@ -2,11 +2,11 @@ ARG CONFLUENCE_VERSION=8.5
 
 FROM atlassian/confluence:${CONFLUENCE_VERSION}
 
-ARG CONFLUENCE_VERSION
+ARG LABEL_MAINTAINER
 
-LABEL maintainer="不就订个外卖么<yeclimeric@gmail.com>"
+LABEL maintainer="${LABEL_MAINTAINER}"
 LABEL version="${CONFLUENCE_VERSION}"
-LABEL description="atlassian confluence 破解版"
+LABEL description="atlassian confluence 友谊版，仅供学习使用，不可用于商业用途"
 
 ENV TZ=Asia/Shanghai
 
@@ -40,7 +40,7 @@ RUN sed -i '2i CATALINA_OPTS="-Dupm.pac.disable=true ${CATALINA_OPTS}"' ${ENV_SC
 RUN echo "=== 验证setenv.sh脚本第2行,看到CATALINA_OPTS变量定义表示成功 ===" \
     && head -3 ${ENV_SCRIPT}
 
-
-
 # 设置JAVA_OPTS
 ENV JAVA_OPTS="-javaagent:/opt/crack/atlassian-agent.jar"
+
+ENV JVM_SUPPORT_RECOMMENDED_ARGS="-Datlassian.upm.signature.check.disabled=true"
