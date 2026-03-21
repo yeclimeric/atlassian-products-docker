@@ -18,11 +18,12 @@ ENV PLUGIN_DIR=${CONFLUENCE_INSTALL_DIR}/confluence/WEB-INF/atlassian-bundled-pl
 COPY utils/crack/atlassian-agent.jar /opt/crack/atlassian-agent.jar
 # 注入 mysql 驱动包
 COPY mysql/driver/mysql-connector-java-8.0.25.jar ${CONFLUENCE_INSTALL_DIR}/confluence/WEB-INF/lib/
-# 注入可联网的应用市场插件包
-COPY utils/lib/atlassian-universal-plugin-manager-plugin-6.0.8.jar ${PLUGIN_DIR}/
 
 # 删除默认插件包
-RUN rm -f ${PLUGIN_DIR}/com.atlassian.upm.atlassian-universal-plugin-manager-plugin-6.1.19.jar
+RUN rm -f ${PLUGIN_DIR}/com.atlassian.upm.atlassian-universal-plugin-manager-plugin*
+
+# 注入可联网的应用市场插件包
+COPY utils/lib/atlassian-universal-plugin-manager-plugin-6.0.8.jar ${PLUGIN_DIR}/
 
 # 验证拷贝成功，删除成功
 RUN echo "=== 验证插件目录,看到atlassian-universal-plugin-manager-plugin-6.0.8.jar插件包表示成功 ===" \
