@@ -14,6 +14,7 @@ ENV TZ=Asia/Shanghai
 
 ENV START_SCRIPT=${BITBUCKET_INSTALL_DIR}/bin/start-bitbucket.sh
 ENV WEBAPP_SCRIPT=${BITBUCKET_INSTALL_DIR}/bin/_start-webapp.sh
+ENV PLUGIN_DIR=${BITBUCKET_INSTALL_DIR}/app/WEB-INF/atlassian-bundled-plugins/
 
 
 COPY mysql/driver/mysql-connector-java-8.0.25.jar ${BITBUCKET_INSTALL_DIR}/app/WEB-INF/lib/mysql-connector-java-8.0.25.jar
@@ -39,3 +40,13 @@ RUN if grep -q "^JAVA_OPTS=" ${WEBAPP_SCRIPT}; then \
 
 RUN echo "=== 验证 _start-webapp.sh 中的JAVA_OPTS ===" \
     && grep "JAVA_OPTS" ${WEBAPP_SCRIPT} | head -5
+
+# 删除默认插件包
+RUN rm -fv ${PLUGIN_DIR}/atlassian-universal-plugin-manager-plugin*
+
+# 注入可联网的应用市场插件包
+COPY utils/lib/atlassian-universal-plugin-manager-plugin-6.0.8.jar ${PLUGIN_DIR}/
+
+# 验证拷贝成功，删除成功
+RUN echo "=== 验证插件目录,看到atlassian-universal-plugin-manager-plugin-6.0.8.jar插件包表示成功 ===" \
+    && ls -l ${PLUGIN_DIR} | grep "universal-plugin-manager"
