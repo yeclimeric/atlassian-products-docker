@@ -41,6 +41,7 @@ RUN if grep -q "^JAVA_OPTS=" ${WEBAPP_SCRIPT}; then \
 RUN echo "=== 验证 _start-webapp.sh 中的JAVA_OPTS ===" \
     && grep "JAVA_OPTS" ${WEBAPP_SCRIPT} | head -5
 
+############## 开始处理8.7以上，9.0以下的UPM server EOL feature功能
 COPY utils/lib/atlassian-universal-plugin-manager-plugin-6.0.8.jar /tmp/
 
 # 如果版本号小于9，执行插件替换
@@ -53,5 +54,8 @@ RUN MAJOR_VERSION=$(echo ${BITBUCKET_VERSION} | cut -d'.' -f1); \
     && ls -l ${PLUGIN_DIR} | grep "universal-plugin-manager"; \
     else \
     echo "=== Bitbucket version ${BITBUCKET_VERSION} >= 9.0, skipping UPM plugin replacement ==="; \
-    fi \
-    && rm -f /tmp/atlassian-universal-plugin-manager-plugin-6.0.8.jar
+    fi
+
+RUN rm -f /tmp/atlassian-universal-plugin-manager-plugin-6.0.8.jar
+
+############## 结束处理8.7以上，9.0以下的UPM server EOL feature功能
