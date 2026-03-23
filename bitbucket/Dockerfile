@@ -41,12 +41,17 @@ RUN if grep -q "^JAVA_OPTS=" ${WEBAPP_SCRIPT}; then \
 RUN echo "=== 验证 _start-webapp.sh 中的JAVA_OPTS ===" \
     && grep "JAVA_OPTS" ${WEBAPP_SCRIPT} | head -5
 
-# 删除默认插件包
-RUN rm -fv ${PLUGIN_DIR}/atlassian-universal-plugin-manager-plugin*
+COPY utils/lib/atlassian-universal-plugin-manager-plugin-6.0.8.jar /tmp/
 
-# 注入可联网的应用市场插件包
-COPY utils/lib/atlassian-universal-plugin-manager-plugin-6.0.8.jar ${PLUGIN_DIR}/
-
-# 验证拷贝成功，删除成功
-RUN echo "=== 验证插件目录,看到atlassian-universal-plugin-manager-plugin-6.0.8.jar插件包表示成功 ===" \
-    && ls -l ${PLUGIN_DIR} | grep "universal-plugin-manager"
+# 如果版本号小于9，执行插件替换
+RUN MAJOR_VERSION=$(echo ${BITBUCKET_VERSION} | cut -d'.' -f1); \
+    if [ "$MAJOR_VERSION" -lt 9 ]; then \
+    echo "=== Bitbucket version ${BITBUCKET_VERSION} < 9.0, applying UPM plugin replacement ===" \
+    && rm -fv ${PLUGIN_DIR}/atlassian-universal-plugin-manager-plugin* \
+    && cp /tmp/atlassian-universal-plugin-manager-plugin-6.0.8.jar ${PLUGIN_DIR}/ \
+    && echo "=== 验证插件目录 ===" \
+    && ls -l ${PLUGIN_DIR} | grep "universal-plugin-manager"; \
+    else \
+    echo "=== Bitbucket version ${BITBUCKET_VERSION} >= 9.0, skipping UPM plugin replacement ==="; \
+    fi \
+    && rm -f /tmp/atlassian-universal-plugin-manager-plugin-6.0.8.jar
